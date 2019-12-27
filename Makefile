@@ -11,8 +11,6 @@ clean:
 .PHONY: install
 install: build
 	sudo cp $(BINARY) /usr/local/bin
-	@echo
-	@echo " zx was successfully installed."
 
 .PHONY: run
 run: build
