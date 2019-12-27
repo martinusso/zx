@@ -44,11 +44,3 @@ func validCPF(cpf string) string {
 	}
 	return fmt.Sprintf("%s ➜ %s", cpf, v)
 }
-
-func green(s string) string {
-	return fmt.Sprintf("\033[1;32m%s\033[0m", s)
-}
-
-func red(s string) string {
-	return fmt.Sprintf("\033[1;31m%s\033[0m", s)
-}
