@@ -16,7 +16,7 @@ var infoCmd = &cobra.Command{
 	Long:  `Print the info of zx`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println(zxDescription + `
-version: v0.1.0`)
+version: v0.2.0`)
 	},
 }
 
