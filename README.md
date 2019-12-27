@@ -45,14 +45,40 @@ make install
 ```
 ## Commands
 
-### zx info
+### info
 
-`➜ zx info`
-
-**output**
 ```
+~ zx info
 zx is a set of handy commands to make some daily tasks easier and more fun.
 version: v0.1.0
+```
+
+### password
+
+```
+~ zx password
+0n&r82i$
+```
+
+```
+~ zx password 16
+F@+pqBwkSH1907=2
+```
+
+### salt
+
+```
+~ zx salt
+Password: S[H3/7l1
+Hash: efb283bcde5fe42c177558a563c0b998f179ba312777aa36218465ffe35ca3ba115f7e51cff736ca7a783b7d27be2ec072b80a2f6c817139ab2b32429a4fcd03
+Salt: 6e034879d4c3e97def89875d23b7a173a438b1611269168d5fcb548cb7676b7b703e82887508bc1224732ef04373b45154760982bd90d7e40a4a5057dafd7c05
+```
+
+```
+~ zx salt MyPassword       
+Password: MyPassword
+Hash: c60bf872599be8327d40d2c29bf5abfec1c78da6870f9c6c83d8a1bb7069dd4fdfee535b5a24d658a1ff085830385a9242ff7f5a51ad9e60542e4b661f582783
+Salt: 4c27d2a1ffc2fda6cb678e917679d39d7cfcaba1d9d207a0d8509c1c02946155071cdd2515aec0fe266e05d84ce1b2d13dd85ad8db0764b55e8e4024e90f2771
 ```
 
 ## Contributing

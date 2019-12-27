@@ -6,8 +6,8 @@ import (
 
 func TestGeneratePassword(t *testing.T) {
 	p := generatePassword([]string{})
-	if len(p) != 3 {
-		t.Errorf("Expected '%d', got '%d'", 3, len(p))
+	if len(p) != 8 {
+		t.Errorf("Expected '%d', got '%d'", 8, len(p))
 	}
 }
 

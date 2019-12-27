@@ -59,7 +59,7 @@ func getPasswordLength(args []string) (length int) {
 		length, _ = strconv.Atoi(args[0])
 	}
 	if length < 3 {
-		length = 3
+		length = 8
 	}
 	return
 }
