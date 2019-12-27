@@ -19,7 +19,7 @@ var (
 	passwordLength int
 
 	passwordCmd = &cobra.Command{
-		Use:   "password [SIZE]",
+		Use:   "password",
 		Short: "Generate a random password",
 		Long:  `Generate a random password`,
 		Run: func(cmd *cobra.Command, args []string) {

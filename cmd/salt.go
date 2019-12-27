@@ -13,7 +13,7 @@ var (
 	saltPassword string
 
 	saltCmd = &cobra.Command{
-		Use:   "salt password",
+		Use:   "salt",
 		Short: "Generate a random and unique salt and hash for passwords",
 		Long:  `Generate a random and unique salt and hash for passwords`,
 		Run: func(cmd *cobra.Command, args []string) {

@@ -9,7 +9,7 @@ import (
 
 var (
 	cpfCmd = &cobra.Command{
-		Use:   "cpf [CPF]",
+		Use:   "cpf",
 		Short: "Generate/Validate CPF",
 		Long:  `Generate a valid CPF or Validate if pass a CPF as args`,
 		Run: func(cmd *cobra.Command, args []string) {

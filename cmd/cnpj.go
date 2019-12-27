@@ -9,7 +9,7 @@ import (
 
 var (
 	cnpjCmd = &cobra.Command{
-		Use:   "cnpj [CNPJ]",
+		Use:   "cnpj",
 		Short: "Generate/Validate CNPJ",
 		Long:  `Generate a valid CNPJ or Validate if pass a CNPJ as args`,
 		Run: func(cmd *cobra.Command, args []string) {
