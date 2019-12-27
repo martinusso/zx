@@ -53,6 +53,23 @@ zx is a set of handy commands to make some daily tasks easier and more fun.
 version: v0.1.0
 ```
 
+### CPF
+
+```
+~ zx cpf
+08507460003
+```
+
+```
+~ zx cpf 08507460003
+08507460003 ➜ valid
+```
+
+```
+~ zx cpf 08507460001
+08507460001 ➜ invalid
+```
+
 ### password
 
 ```
