@@ -50,8 +50,5 @@ func processBase64(args []string) string {
 }
 
 func isEncode() bool {
-	if inputDecode {
-		return false
-	}
-	return true
+	return inputEncode
 }
