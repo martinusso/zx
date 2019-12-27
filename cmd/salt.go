@@ -14,8 +14,8 @@ var (
 
 	saltCmd = &cobra.Command{
 		Use:   "salt password",
-		Short: "Generate a random password",
-		Long:  `Generate a random password`,
+		Short: "Generate a random and unique salt and hash for passwords",
+		Long:  `Generate a random and unique salt and hash for passwords`,
 		Run: func(cmd *cobra.Command, args []string) {
 			p, h, s := generateSalt(args)
 			fmt.Println(fmt.Sprintf("Password: %s\nHash: %s\nSalt: %s", p, h, s))
