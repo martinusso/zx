@@ -19,11 +19,11 @@ func TestGeneratePasswordWithLength(t *testing.T) {
 }
 
 func TestGeneratePasswordWithFlag(t *testing.T) {
-	passwordLength = 14
+	inputLength = 14
 	p := generatePassword([]string{})
 	if len(p) != 14 {
 		t.Errorf("Expected '%d', got '%d'", 14, len(p))
 	}
 
-	passwordLength = 0
+	inputLength = 0
 }

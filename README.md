@@ -1,6 +1,8 @@
 # zx
 
-zx is a set of handy commands to make some daily tasks easier and more fun.
+zx is a set of handy commands to make some daily tasks easier.
+
+[![Build Status](https://travis-ci.org/martinusso/zx.svg?branch=master)](https://travis-ci.org/martinusso/zx)
 
 ## Installing
 
@@ -49,8 +51,8 @@ make install
 
 ```
 ~ zx info
-zx is a set of handy commands to make some daily tasks easier and more fun.
-version: v0.1.0
+zx is a set of handy commands to make some daily tasks easier.
+version: v0.3.0
 ```
 
 ### CPF
@@ -95,9 +97,51 @@ version: v0.1.0
 0n&r82i$
 ```
 
+Specifying the size:
+
 ```
 ~ zx password 16
 F@+pqBwkSH1907=2
+
+~ zx password -l=16
+Hk^vO4N]#tuI83le
+```
+
+zx password has the `no|N` flag which allows you to remove character types in the password generation.
+
+Password without lowercase letters:
+
+```
+~ zx password -Nl
+F@+BSH1907=2
+```
+
+Password without uppercase letters:
+
+```
+~ zx password -Nu
+@+pqwk1907=2
+```
+
+Password without numbers: 
+
+```
+~ zx password -Nn
+F@+pqBwkSH=
+```
+
+Password without symbols:
+
+```
+~ zx password -Ns
+FpqBwkSH19072
+```
+
+And you can even combine several of them
+
+```
+~ zx password -Nsu
+pqwk19072
 ```
 
 ### salt

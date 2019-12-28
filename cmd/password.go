@@ -4,19 +4,22 @@ import (
 	"fmt"
 	"math/rand"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/spf13/cobra"
 )
 
 const (
-	letters  = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	digits   = "0123456789"
-	specials = "~=+%^*/()[]{}/!@#$?|"
+	lowerLetters = "abcdefghijklmnopqrstuvwxyz"
+	upperLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	numbers      = "0123456789"
+	symbols      = "~=+%^*/()[]{}/!@#$?|"
 )
 
 var (
-	passwordLength int
+	inputLength int
+	inputNo     string
 
 	passwordCmd = &cobra.Command{
 		Use:   "password",
@@ -29,21 +32,48 @@ var (
 )
 
 func init() {
-	passwordCmd.Flags().IntVarP(&passwordLength, "length", "l", 0, "Password length")
+	passwordCmd.Flags().IntVarP(&inputLength, "length", "l", 0, "Password length")
+	passwordCmd.Flags().StringVarP(&inputNo, "no", "N", "", "Password without [l]owercase, [u]ppercase, [n]umbers, [s]ymbols")
 	rootCmd.AddCommand(passwordCmd)
 }
 
 func generatePassword(args []string) string {
-	rand.Seed(time.Now().UnixNano())
-
 	length := getPasswordLength(args)
-	all := letters + digits + specials
+	return makePassword(length)
+}
 
-	buf := make([]byte, length)
-	buf[0] = letters[rand.Intn(len(letters))]
-	buf[1] = digits[rand.Intn(len(digits))]
-	buf[2] = specials[rand.Intn(len(specials))]
-	for i := 3; i < length; i++ {
+func makePassword(l int) string {
+	var all string
+	var i int
+
+	buf := make([]byte, l)
+	if !strings.Contains(inputNo, "l") {
+		buf[i] = lowerLetters[rand.Intn(len(lowerLetters))]
+		all += lowerLetters
+		i += 1
+	}
+	if !strings.Contains(inputNo, "u") {
+		buf[i] = upperLetters[rand.Intn(len(upperLetters))]
+		all += upperLetters
+		i += 1
+	}
+	if !strings.Contains(inputNo, "n") {
+		buf[i] = numbers[rand.Intn(len(numbers))]
+		all += numbers
+		i += 1
+	}
+	if !strings.Contains(inputNo, "s") {
+		buf[i] = symbols[rand.Intn(len(symbols))]
+		all += symbols
+		i += 1
+	}
+
+	if all == "" {
+		return ""
+	}
+
+	rand.Seed(time.Now().UnixNano())
+	for i := i; i < l; i++ {
 		buf[i] = all[rand.Intn(len(all))]
 	}
 	rand.Shuffle(len(buf), func(i, j int) {
@@ -53,8 +83,8 @@ func generatePassword(args []string) string {
 }
 
 func getPasswordLength(args []string) (length int) {
-	if passwordLength != 0 {
-		length = passwordLength
+	if inputLength != 0 {
+		length = inputLength
 	} else if len(args) > 0 {
 		length, _ = strconv.Atoi(args[0])
 	}
