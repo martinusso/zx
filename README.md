@@ -2,7 +2,9 @@
 
 zx is a set of handy commands to make some daily tasks easier.
 
+[![Circle CI](https://circleci.com/gh/martinusso/zx/tree/master.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/martinusso/zx/tree/master)
 [![Build Status](https://travis-ci.org/martinusso/zx.svg?branch=master)](https://travis-ci.org/martinusso/zx)
+[![Coverage Status](https://coveralls.io/repos/github/martinusso/zx/badge.svg?branch=master)](https://coveralls.io/github/martinusso/zx?branch=master)
 
 ## Installing
 
