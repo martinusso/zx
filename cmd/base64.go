@@ -4,6 +4,7 @@ import (
 	"encoding/base64"
 	"fmt"
 
+	"github.com/martinusso/zx/internal/clipboard"
 	"github.com/spf13/cobra"
 )
 
@@ -18,7 +19,9 @@ var (
 zx base64 -e zx
 zx base64 -d eng=`,
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Println(processBase64(args))
+			s := processBase64(args)
+			clipboard.Write(s)
+			fmt.Println(s)
 		},
 	}
 )

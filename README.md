@@ -58,6 +58,22 @@ zx is a set of handy commands to make some daily tasks easier.
 version: v0.3.0
 ```
 
+### base64
+
+_Copies automatically the output to the clipboard._
+
+Encode
+```
+~ zx base64 -e "zx is a set of handy commands to make some daily tasks easier"
+enggaXMgYSBzZXQgb2YgaGFuZHkgY29tbWFuZHMgdG8gbWFrZSBzb21lIGRhaWx5IHRhc2tzIGVhc2llcg==
+```
+
+Decode
+```
+~ zx base64 enggaXMgYSBzZXQgb2YgaGFuZHkgY29tbWFuZHMgdG8gbWFrZSBzb21lIGRhaWx5IHRhc2tzIGVhc2llcg==
+zx is a set of handy commands to make some daily tasks easier
+```
+
 ### cpf
 
 _Copies automatically the output to the clipboard._
