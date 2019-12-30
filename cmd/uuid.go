@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	uuid "github.com/beevik/guid"
+	"github.com/martinusso/zx/internal/clipboard"
 	"github.com/spf13/cobra"
 )
 
@@ -15,7 +16,9 @@ var (
 		Short: "Generate a random UUID",
 		Long:  `Generate a random UUID`,
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Println(generateUUID())
+			uuid := generateUUID()
+			clipboard.Write(uuid)
+			fmt.Println(uuid)
 		},
 	}
 )

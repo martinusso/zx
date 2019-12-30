@@ -7,6 +7,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/martinusso/zx/internal/clipboard"
 	"github.com/spf13/cobra"
 )
 
@@ -26,7 +27,9 @@ var (
 		Short: "Generate a random password",
 		Long:  `Generate a random password`,
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Println(generatePassword(args))
+			s := generatePassword(args)
+			clipboard.Write(s)
+			fmt.Println(s)
 		},
 	}
 )

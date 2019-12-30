@@ -5,6 +5,7 @@ import (
 
 	helper "github.com/martinusso/go-docs/cnpj"
 	"github.com/martinusso/zx/internal/cli"
+	"github.com/martinusso/zx/internal/clipboard"
 	"github.com/spf13/cobra"
 )
 
@@ -14,7 +15,9 @@ var (
 		Short: "Generate/Validate CNPJ",
 		Long:  `Generate a valid CNPJ or Validate if pass a CNPJ as args`,
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Println(cnpj(args))
+			s := cnpj(args)
+			clipboard.Write(s)
+			fmt.Println(s)
 		},
 	}
 )

@@ -5,6 +5,7 @@ import (
 
 	helper "github.com/martinusso/go-docs/cpf"
 	"github.com/martinusso/zx/internal/cli"
+	"github.com/martinusso/zx/internal/clipboard"
 	"github.com/spf13/cobra"
 )
 
@@ -14,7 +15,9 @@ var (
 		Short: "Generate/Validate CPF",
 		Long:  `Generate a valid CPF or Validate if pass a CPF as args`,
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Println(cpf(args))
+			s := cpf(args)
+			clipboard.Write(s)
+			fmt.Println(s)
 		},
 	}
 )
