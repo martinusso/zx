@@ -57,7 +57,9 @@ zx is a set of handy commands to make some daily tasks easier.
 version: v0.3.0
 ```
 
-### CPF
+### cpf
+
+_Copies automatically the output to the clipboard._
 
 ```
 ~ zx cpf
@@ -74,8 +76,9 @@ version: v0.3.0
 08507460001 ➜ invalid
 ```
 
+### cnpj
 
-### CNPJ
+_Copies automatically the output to the clipboard._
 
 ```
 ~ zx cnpj
@@ -92,7 +95,15 @@ version: v0.3.0
 72114610000121 ➜ invalid
 ```
 
+### exchange
+
+```
+~ zx exchange
+BRL: 4.05 (USD 0.25), EUR: 0.90 (USD 1.12), GBP: 0.76 (USD 1.31)
+```
 ### password
+
+_Copies automatically the output to the clipboard._
 
 ```
 ~ zx password
@@ -160,6 +171,15 @@ Salt: 6e034879d4c3e97def89875d23b7a173a438b1611269168d5fcb548cb7676b7b703e828875
 Password: MyPassword
 Hash: c60bf872599be8327d40d2c29bf5abfec1c78da6870f9c6c83d8a1bb7069dd4fdfee535b5a24d658a1ff085830385a9242ff7f5a51ad9e60542e4b661f582783
 Salt: 4c27d2a1ffc2fda6cb678e917679d39d7cfcaba1d9d207a0d8509c1c02946155071cdd2515aec0fe266e05d84ce1b2d13dd85ad8db0764b55e8e4024e90f2771
+```
+
+### uuid
+
+_Copies automatically the output to the clipboard._
+
+```
+~ zx uuid
+d9ed16f4-f315-44e4-8e57-b00516d73420
 ```
 
 ## Contributing

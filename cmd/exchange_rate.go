@@ -9,6 +9,7 @@ import (
 
 type erResponse struct {
 	Real struct {
+		BRL float32 `json:"BRL"`
 		USD float32 `json:"USD"`
 		EUR float32 `json:"EUR"`
 		GBP float32 `json:"GBP"`
@@ -16,12 +17,15 @@ type erResponse struct {
 }
 
 var (
-	url = "https://api.exchangeratesapi.io/latest?base=BRL"
+	url = "https://api.exchangeratesapi.io/latest?base=USD"
 
 	exchangeRateCmd = &cobra.Command{
 		Use:   "exchange",
 		Short: "List of foreign currency rates",
-		Long:  `List of foreign currency rates`,
+		Long: `List of foreign currency rates.
+
+Reference exchange rate: US dollar (USD).
+BRL: ? (BRL 1 = USD ?), EUR: ? (EUR 1 = USD ?), GBP: ? (GBP 1 = USD ?)`,
 		Run: func(cmd *cobra.Command, args []string) {
 			fmt.Println(exchangeRate())
 		},
@@ -39,8 +43,11 @@ func exchangeRate() string {
 		return ""
 	}
 
-	return fmt.Sprintf("Dólar: %.2f, Euro: %.2f, Libra: %.2f",
-		1/data.Real.USD,
+	return fmt.Sprintf("BRL: %.2f (USD %.2f), EUR: %.2f (USD %.2f), GBP: %.2f (USD %.2f)",
+		data.Real.BRL,
+		1/data.Real.BRL,
+		data.Real.EUR,
 		1/data.Real.EUR,
+		data.Real.GBP,
 		1/data.Real.GBP)
 }
