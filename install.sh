@@ -58,8 +58,8 @@ setup_zx() {
 		exit 1
 	}
   
-  cd zx
-  make install
+	cd zx
+	make install
 
 	echo
 }
