@@ -3,6 +3,8 @@ package cmd
 import (
 	"fmt"
 	"testing"
+
+	"github.com/martinusso/zx/internal/cli"
 )
 
 func TestCNPJ(t *testing.T) {
@@ -12,7 +14,7 @@ func TestCNPJ(t *testing.T) {
 	}
 
 	new := cnpj([]string{got})
-	expected := fmt.Sprintf("%s ➜ %s", got, green("valid"))
+	expected := fmt.Sprintf("%s ➜ %s", got, cli.Green("valid"))
 	if new != expected {
 		t.Errorf("Expected '%s', got '%s'", expected, new)
 	}

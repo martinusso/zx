@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	helper "github.com/martinusso/go-docs/cnpj"
+	"github.com/martinusso/zx/internal/cli"
 	"github.com/spf13/cobra"
 )
 
@@ -38,9 +39,9 @@ func generateCNPJ() string {
 }
 
 func validCNPJ(cnpj string) string {
-	v := red("invalid")
+	v := cli.Red("invalid")
 	if helper.Valid(cnpj) {
-		v = green("valid")
+		v = cli.Green("valid")
 	}
 	return fmt.Sprintf("%s ➜ %s", cnpj, v)
 }

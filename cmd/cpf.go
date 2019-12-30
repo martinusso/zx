@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	helper "github.com/martinusso/go-docs/cpf"
+	"github.com/martinusso/zx/internal/cli"
 	"github.com/spf13/cobra"
 )
 
@@ -38,9 +39,9 @@ func generateCPF() string {
 }
 
 func validCPF(cpf string) string {
-	v := red("invalid")
+	v := cli.Red("invalid")
 	if helper.Valid(cpf) {
-		v = green("valid")
+		v = cli.Green("valid")
 	}
 	return fmt.Sprintf("%s ➜ %s", cpf, v)
 }

@@ -1,11 +1,11 @@
-package cmd
+package cli
 
 import "fmt"
 
-func green(s string) string {
+func Green(s string) string {
 	return fmt.Sprintf("\033[1;32m%s\033[0m", s)
 }
 
-func red(s string) string {
+func Red(s string) string {
 	return fmt.Sprintf("\033[1;31m%s\033[0m", s)
 }
