@@ -13,8 +13,9 @@ zx is a set of handy commands to make some daily tasks easier.
 ##### Prerequisites
 
 - Check that Go is installed correctly
-- curl or wget should be installed
-- git should be installed
+- `curl` or `wget` should be installed
+- `git` should be installed
+- Copying to the Clipboard requires `xclip` or `xsel` command to be installed
 
 #### Basic Installation
 
