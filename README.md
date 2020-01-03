@@ -119,6 +119,27 @@ _Copies automatically the output to the clipboard._
 ~ zx exchange
 BRL: 4.05 (USD 0.25), EUR: 0.90 (USD 1.12), GBP: 0.76 (USD 1.31)
 ```
+
+
+### minify
+
+_Copies automatically the output to the clipboard._
+
+Supported media types: `css`, `html`, `js`, `json`, `svg`, `xml`.
+
+```
+~ zx minify css
+Type (or paste) here:
+body {
+   overflow: hidden;
+   background-color: #000000;
+   background-image: url(images/bg.gif);
+   background-repeat: no-repeat;
+}
+^]
+body{overflow:hidden;background-color:#000;background-image:url(images/bg.gif);background-repeat:no-repeat}
+```
+
 ### password
 
 _Copies automatically the output to the clipboard._
