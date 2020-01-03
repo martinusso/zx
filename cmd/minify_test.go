@@ -76,15 +76,16 @@ func TestMinifyHTML(t *testing.T) {
     <title>This is a title</title>
   </head>
   <body>
-    <p>Hello world!</p>
+  <!-- comment here -->
+    <p class="first program">Hello world!</p>
   </body>
 </html>`)
 
-	got, err := testMinify(mediaTypeJSON, input)
+	got, err := testMinify(mediaTypeHTML, input)
 	if err != nil {
 		t.Error(err)
 	}
-	expected := `<!DOCTYPE html><html><head><title>This is a title</title></head><body><p>Hello world!</p></body></html>`
+	expected := `<!doctype html><html><head><title>This is a title</title></head><body><p class="first program">Hello world!</p></body></html>`
 	if got != expected {
 		t.Errorf("Expected '%s', got '%s'", expected, got)
 	}
@@ -107,5 +108,6 @@ func testMinify(mediaType string, input []byte) (string, error) {
 	defer func() { os.Stdin = rescueStdin }()
 	os.Stdin = tmpfile
 
+	inputMinify = ""
 	return runMinify([]string{mediaType}), nil
 }

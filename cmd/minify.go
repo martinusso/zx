@@ -67,16 +67,24 @@ func runMinify(args []string) string {
 	if len(lines) == 0 {
 		return ""
 	}
+
 	m := minify.New()
 	m.AddFunc("text/css", css.Minify)
 	m.AddFunc("text/html", html.Minify)
+	m.Add("text/html", &html.Minifier{
+		KeepConditionalComments: true,
+		KeepDefaultAttrVals:     true,
+		KeepDocumentTags:        true,
+		KeepEndTags:             true,
+	})
 	m.AddFunc("image/svg+xml", svg.Minify)
 	m.AddFuncRegexp(regexp.MustCompile("^(application|text)/(x-)?(java|ecma)script$"), js.Minify)
 	m.AddFuncRegexp(regexp.MustCompile("[/+]json$"), json.Minify)
 	m.AddFuncRegexp(regexp.MustCompile("[/+]xml$"), xml.Minify)
 	s, err := m.String(mediaType, strings.Join(lines, ""))
 	if err != nil {
-		panic(err)
+		fmt.Fprintln(os.Stderr, err)
+		return ""
 	}
 	return s
 }
