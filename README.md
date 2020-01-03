@@ -127,6 +127,8 @@ _Copies automatically the output to the clipboard._
 
 Supported media types: `css`, `html`, `js`, `json`, `svg`, `xml`.
 
+To confirm the input, press `Ctrl+] ENTER`
+
 ```
 ~ zx minify css
 Type (or paste) here:

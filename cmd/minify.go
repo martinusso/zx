@@ -40,7 +40,7 @@ var (
 
 ` + supportedMediaTypes + `
 
-To confirm input, press Ctrl+] ENTER`,
+To confirm the input, press Ctrl+] ENTER`,
 		Run: func(cmd *cobra.Command, args []string) {
 			s := runMinify(args)
 			clipboard.Write(s)
