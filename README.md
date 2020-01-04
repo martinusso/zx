@@ -61,6 +61,8 @@ version: v0.3.0
 
 ### base64
 
+Decode from Base64 or Encode to Base64.
+
 _Copies automatically the output to the clipboard._
 
 Encode
@@ -75,26 +77,9 @@ Decode
 zx is a set of handy commands to make some daily tasks easier
 ```
 
-### cpf
-
-_Copies automatically the output to the clipboard._
-
-```
-~ zx cpf
-08507460003
-```
-
-```
-~ zx cpf 08507460003
-08507460003 ➜ valid
-```
-
-```
-~ zx cpf 08507460001
-08507460001 ➜ invalid
-```
-
 ### cnpj
+
+Generate a valid CNPJ or Validate if pass a CNPJ as args.
 
 _Copies automatically the output to the clipboard._
 
@@ -113,21 +98,66 @@ _Copies automatically the output to the clipboard._
 72114610000121 ➜ invalid
 ```
 
+### cpf
+
+Generate a valid CPF or Validate if pass a CPF as args.
+
+_Copies automatically the output to the clipboard._
+
+```
+~ zx cpf
+08507460003
+```
+
+```
+~ zx cpf 08507460003
+08507460003 ➜ valid
+```
+
+```
+~ zx cpf 08507460001
+08507460001 ➜ invalid
+```
+
 ### exchange
+
+List of foreign currency rates
 
 ```
 ~ zx exchange
 BRL: 4.05 (USD 0.25), EUR: 0.90 (USD 1.12), GBP: 0.76 (USD 1.31)
 ```
 
+### jwt
+
+Decode a JWT token.
+
+This command doesn't validate the token, any well formed JWT can be decoded.
+
+```
+~ zx jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c 
+Header:
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+
+Payload:
+{
+  "iat": 1516239022,
+  "name": "John Doe",
+  "sub": "1234567890"
+}
+```
 
 ### minify
 
-_Copies automatically the output to the clipboard._
-
-Supported media types: `css`, `html`, `js`, `json`, `svg`, `xml`.
+Minify removes whitespace, strips comments, combines files, and optimizes/shortens a few common programming patterns. Supported media types: `css`, `html`, `js`, `json`, `svg`, `xml`.
 
 To confirm the input, press `Ctrl+] ENTER`
+
+_Copies automatically the output to the clipboard._
+
 
 ```
 ~ zx minify css
@@ -143,6 +173,8 @@ body{overflow:hidden;background-color:#000;background-image:url(images/bg.gif);b
 ```
 
 ### password
+
+Generate a random password.
 
 _Copies automatically the output to the clipboard._
 
@@ -200,6 +232,8 @@ pqwk19072
 
 ### salt
 
+Generate a random and unique salt and hash for passwords.
+
 ```
 ~ zx salt
 Password: S[H3/7l1
@@ -215,6 +249,8 @@ Salt: 4c27d2a1ffc2fda6cb678e917679d39d7cfcaba1d9d207a0d8509c1c02946155071cdd2515
 ```
 
 ### uuid
+
+Generate a random UUID.
 
 _Copies automatically the output to the clipboard._
 
