@@ -46,7 +46,7 @@ func TestBase64Decode(t *testing.T) {
 func TestBase64DecodeError(t *testing.T) {
 	inputDecode = true
 	_, err := runBase64([]string{"zx"})
-	expectedErr := "Decode error: illegal base64 data at input byte 0"
+	expectedErr := "illegal base64 data at input byte 0"
 	if err.Error() != expectedErr {
 		t.Errorf("Expected '%s', got '%s'", expectedErr, err)
 	}

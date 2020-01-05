@@ -8,7 +8,5 @@ require (
 	github.com/martinusso/go-docs v1.0.0
 	github.com/spf13/cobra v0.0.5
 	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/tdewolff/minify v2.3.6+incompatible
 	github.com/tdewolff/minify/v2 v2.6.3
-	github.com/tdewolff/parse v2.3.4+incompatible // indirect
 )

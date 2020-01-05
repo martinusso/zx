@@ -41,12 +41,12 @@ func runDecodeJWT(args []string) (string, error) {
 
 	header, err := decodeSegment(token[0])
 	if err != nil {
-		return "", fmt.Errorf("Invalid header: %s", err.Error())
+		return "", fmt.Errorf("Invalid header. %s", err.Error())
 	}
 
 	payload, err := decodeSegment(token[1])
 	if err != nil {
-		return "", fmt.Errorf("Invalid payload: %s", err.Error())
+		return "", fmt.Errorf("Invalid payload. %s", err.Error())
 	}
 
 	return fmt.Sprintf("Header:\n%s\n\nPayload:\n%s", header, payload), nil

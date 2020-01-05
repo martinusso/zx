@@ -32,7 +32,7 @@ Payload:
 func TestDecodeInvalidHeaderJWT(t *testing.T) {
 	invalidJWT := `eyJhbGciOiJI*zI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c`
 	_, err := runDecodeJWT([]string{invalidJWT})
-	expected := "Invalid header: illegal base64 data at input byte 12"
+	expected := "Invalid header. illegal base64 data at input byte 12"
 	if err.Error() != expected {
 		t.Errorf("Expected error %s, got: %s", expected, err)
 	}
@@ -41,7 +41,7 @@ func TestDecodeInvalidHeaderJWT(t *testing.T) {
 func TestDecodeInvalidPayloadJWT(t *testing.T) {
 	invalidJWT := `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIi*iIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c`
 	_, err := runDecodeJWT([]string{invalidJWT})
-	expected := "Invalid payload: illegal base64 data at input byte 8"
+	expected := "Invalid payload. illegal base64 data at input byte 8"
 	if err.Error() != expected {
 		t.Errorf("Expected error %s, got: %s", expected, err)
 	}

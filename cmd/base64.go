@@ -51,7 +51,7 @@ func runBase64(args []string) (string, error) {
 	// decode
 	decoded, err := base64.StdEncoding.DecodeString(input)
 	if err != nil {
-		return "", fmt.Errorf("Decode error: %s", err.Error())
+		return "", err
 	}
 	return string(decoded), nil
 }
