@@ -8,14 +8,20 @@ import (
 )
 
 func TestCNPJ(t *testing.T) {
-	got := cnpj([]string{})
+	got, err := runCNPJ([]string{})
+	if err != nil {
+		t.Errorf("There should not be an error, error: %s", err)
+	}
 	if len(got) != 14 {
 		t.Errorf("Expected '%d', got '%d'", 14, len(got))
 	}
 
-	new := cnpj([]string{got})
+	n, err := runCNPJ([]string{got})
+	if err != nil {
+		t.Errorf("There should not be an error, error: %s", err)
+	}
 	expected := fmt.Sprintf("%s ➜ %s", got, cli.Green("valid"))
-	if new != expected {
-		t.Errorf("Expected '%s', got '%s'", expected, new)
+	if n != expected {
+		t.Errorf("Expected '%s', got '%s'", expected, n)
 	}
 }

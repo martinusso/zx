@@ -20,7 +20,12 @@ var jwtCmd = &cobra.Command{
 	Long: `Decode a JWT token.
 This command doesn't validate the token, any well formed JWT can be decoded.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		return runDecodeJWT(args)
+		s, err := runDecodeJWT(args)
+		if err != nil {
+			return err
+		}
+		fmt.Println(s)
+		return nil
 	},
 }
 
@@ -28,24 +33,23 @@ func init() {
 	rootCmd.AddCommand(jwtCmd)
 }
 
-func runDecodeJWT(args []string) error {
+func runDecodeJWT(args []string) (string, error) {
 	token, err := getTokenJWT(args)
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	header, err := decodeSegment(token[0])
 	if err != nil {
-		return fmt.Errorf("Invalid header: %s", err.Error())
+		return "", fmt.Errorf("Invalid header: %s", err.Error())
 	}
 
 	payload, err := decodeSegment(token[1])
 	if err != nil {
-		return fmt.Errorf("Invalid payload: %s", err.Error())
+		return "", fmt.Errorf("Invalid payload: %s", err.Error())
 	}
 
-	fmt.Printf("Header:\n%s\n\nPayload:\n%s\n", header, payload)
-	return nil
+	return fmt.Sprintf("Header:\n%s\n\nPayload:\n%s", header, payload), nil
 }
 
 func getTokenJWT(args []string) (token []string, err error) {

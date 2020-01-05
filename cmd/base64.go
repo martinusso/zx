@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"encoding/base64"
+	"errors"
 	"fmt"
 
 	"github.com/martinusso/zx/internal/clipboard"
@@ -11,20 +12,23 @@ import (
 var (
 	inputEncode bool
 	inputDecode bool
-
-	base64Cmd = &cobra.Command{
-		Use:   "base64",
-		Short: "Decode from Base64 or Encode to Base64",
-		Long: `Decode from Base64 or Encode to Base64
-zx base64 -e zx
-zx base64 -d eng=`,
-		Run: func(cmd *cobra.Command, args []string) {
-			s := processBase64(args)
-			clipboard.Write(s)
-			fmt.Println(s)
-		},
-	}
 )
+
+var base64Cmd = &cobra.Command{
+	Use:     "base64",
+	Aliases: []string{"b64"},
+	Short:   "Decode from Base64 or Encode to Base64",
+	Long:    `Decode from Base64 or Encode to Base64.`,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		s, err := runBase64(args)
+		if err != nil {
+			return err
+		}
+		clipboard.Write(s)
+		fmt.Println(s)
+		return nil
+	},
+}
 
 func init() {
 	base64Cmd.Flags().BoolVarP(&inputDecode, "decode", "d", false, "Decode from Base64")
@@ -32,26 +36,22 @@ func init() {
 	rootCmd.AddCommand(base64Cmd)
 }
 
-func processBase64(args []string) string {
+func runBase64(args []string) (string, error) {
 	if len(args) == 0 {
-		return "error: Empty input..."
+		return "", errors.New(errEmptyInput)
 	}
 
-	s := args[0]
+	input := args[0]
 
 	// encode
-	if isEncode() {
-		return base64.StdEncoding.EncodeToString([]byte(s))
+	if inputEncode {
+		return base64.StdEncoding.EncodeToString([]byte(input)), nil
 	}
 
 	// decode
-	decoded, err := base64.StdEncoding.DecodeString(s)
+	decoded, err := base64.StdEncoding.DecodeString(input)
 	if err != nil {
-		return fmt.Sprintf("decode error: %s", err)
+		return "", fmt.Errorf("Decode error: %s", err.Error())
 	}
-	return string(decoded)
-}
-
-func isEncode() bool {
-	return inputEncode
+	return string(decoded), nil
 }

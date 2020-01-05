@@ -2,6 +2,10 @@ package cmd
 
 import "github.com/spf13/cobra"
 
+const (
+	errEmptyInput = "Error: Empty input..."
+)
+
 var (
 	rootCmd = &cobra.Command{
 		Use:   "zx",

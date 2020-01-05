@@ -8,25 +8,14 @@ import (
 )
 
 func TestMinifyInvalidMediaType(t *testing.T) {
-	rescueStderr := os.Stderr
-	r, w, _ := os.Pipe()
-	os.Stderr = w
-	defer func() {
-		os.Stderr = rescueStderr
-	}()
-
-	got := runMinify([]string{"invalid"})
+	got, err := runMinify([]string{"invalid"})
+	expectedErr := fmt.Sprintf("An invalid media type was specified. %s", supportedMediaTypes)
+	if err.Error() != expectedErr {
+		t.Errorf("Expected '%s', got '%s'", expectedErr, err)
+	}
 	expected := ""
 	if got != expected {
 		t.Errorf("Expected '%s', got '%s'", expected, got)
-	}
-
-	w.Close()
-	out, _ := ioutil.ReadAll(r)
-
-	expected = fmt.Sprintf("An invalid media type was specified. %s\n", supportedMediaTypes)
-	if string(out) != expected {
-		t.Errorf("Expected %s, got %s", expected, out)
 	}
 }
 
@@ -109,5 +98,5 @@ func testMinify(mediaType string, input []byte) (string, error) {
 	os.Stdin = tmpfile
 
 	inputMinify = ""
-	return runMinify([]string{mediaType}), nil
+	return runMinify([]string{mediaType})
 }

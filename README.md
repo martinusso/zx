@@ -65,6 +65,8 @@ Decode from Base64 or Encode to Base64.
 
 _Copies automatically the output to the clipboard._
 
+##### Usage:
+
 Encode
 ```
 ~ zx base64 -e "zx is a set of handy commands to make some daily tasks easier"
@@ -77,11 +79,23 @@ Decode
 zx is a set of handy commands to make some daily tasks easier
 ```
 
+##### Aliases:
+  `base64`, `b64`
+
+##### Flags:
+```
+  -d, --decode   Decode from Base64
+  -e, --encode   Encode to Base64
+  -h, --help     help for base64
+```
+
 ### cnpj
 
-Generate a valid CNPJ or Validate if pass a CNPJ as args.
+Generate a valid CNPJ or Validate if pass a CNPJ as args
 
 _Copies automatically the output to the clipboard._
+
+##### Usage:
 
 ```
 ~ zx cnpj
@@ -98,11 +112,18 @@ _Copies automatically the output to the clipboard._
 72114610000121 ➜ invalid
 ```
 
+##### Flags:
+```
+  -h, --help   help for cnpj
+```
+
 ### cpf
 
 Generate a valid CPF or Validate if pass a CPF as args.
 
 _Copies automatically the output to the clipboard._
+
+##### Usage:
 
 ```
 ~ zx cpf
@@ -119,13 +140,28 @@ _Copies automatically the output to the clipboard._
 08507460001 ➜ invalid
 ```
 
+##### Flags:
+```
+  -h, --help   help for cpf
+```
+
 ### exchange
 
-List of foreign currency rates
+List of foreign currency rates.
 
+Reference exchange rate: US dollar (USD).
+
+`BRL: ? (BRL 1 = USD ?), EUR: ? (EUR 1 = USD ?), GBP: ? (GBP 1 = USD ?)`
+
+##### Usage:
 ```
 ~ zx exchange
 BRL: 4.05 (USD 0.25), EUR: 0.90 (USD 1.12), GBP: 0.76 (USD 1.31)
+```
+
+##### Flags:
+```
+  -h, --help   help for exchange
 ```
 
 ### jwt
@@ -134,6 +170,7 @@ Decode a JWT token.
 
 This command doesn't validate the token, any well formed JWT can be decoded.
 
+##### Usage:
 ```
 ~ zx jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c 
 Header:
@@ -150,15 +187,22 @@ Payload:
 }
 ```
 
+##### Flags:
+```
+  -h, --help   help for jwt
+```
+
 ### minify
 
-Minify removes whitespace, strips comments, combines files, and optimizes/shortens a few common programming patterns. Supported media types: `css`, `html`, `js`, `json`, `svg`, `xml`.
+Minify removes whitespace, strips comments, combines files, and optimizes/shortens a few common programming patterns.
+Supported media types: `css`, `html`, `js`, `json`, `svg`, `xml`.
 
 To confirm the input, press `Ctrl+] ENTER`
 
 _Copies automatically the output to the clipboard._
 
 
+##### Usage:
 ```
 ~ zx minify css
 Type (or paste) here:
@@ -172,12 +216,20 @@ body {
 body{overflow:hidden;background-color:#000;background-image:url(images/bg.gif);background-repeat:no-repeat}
 ```
 
+##### Flags:
+```
+  -h, --help          help for minify
+  -t, --type string   Supported media types: css, html, js, json, svg, xml
+```
+
 ### password
 
 Generate a random password.
 
 _Copies automatically the output to the clipboard._
 
+
+##### Usage:
 ```
 ~ zx password
 0n&r82i$
@@ -230,10 +282,18 @@ And you can even combine several of them
 pqwk19072
 ```
 
+##### Flags:
+```
+  -h, --help         help for password
+  -l, --length int   Password length
+  -N, --no string    Password without [l]owercase, [u]ppercase, [n]umbers, [s]ymbols
+```
+
 ### salt
 
 Generate a random and unique salt and hash for passwords.
 
+##### Usage:
 ```
 ~ zx salt
 Password: S[H3/7l1
@@ -248,15 +308,27 @@ Hash: c60bf872599be8327d40d2c29bf5abfec1c78da6870f9c6c83d8a1bb7069dd4fdfee535b5a
 Salt: 4c27d2a1ffc2fda6cb678e917679d39d7cfcaba1d9d207a0d8509c1c02946155071cdd2515aec0fe266e05d84ce1b2d13dd85ad8db0764b55e8e4024e90f2771
 ```
 
+##### Flags:
+```
+  -h, --help              help for salt
+  -p, --password string   Password
+```
+
 ### uuid
 
 Generate a random UUID.
 
 _Copies automatically the output to the clipboard._
 
+##### Usage:
 ```
 ~ zx uuid
 d9ed16f4-f315-44e4-8e57-b00516d73420
+```
+
+##### Flags:
+```
+  -h, --help              help for uuid
 ```
 
 ## Contributing

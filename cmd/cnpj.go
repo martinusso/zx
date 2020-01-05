@@ -14,10 +14,14 @@ var (
 		Use:   "cnpj",
 		Short: "Generate/Validate CNPJ",
 		Long:  `Generate a valid CNPJ or Validate if pass a CNPJ as args`,
-		Run: func(cmd *cobra.Command, args []string) {
-			s := cnpj(args)
+		RunE: func(cmd *cobra.Command, args []string) error {
+			s, err := runCNPJ(args)
+			if err != nil {
+				return err
+			}
 			clipboard.Write(s)
 			fmt.Println(s)
+			return nil
 		},
 	}
 )
@@ -26,22 +30,22 @@ func init() {
 	rootCmd.AddCommand(cnpjCmd)
 }
 
-func cnpj(args []string) string {
+func runCNPJ(args []string) (string, error) {
 	var cnpj string
 	if len(args) > 0 {
 		cnpj = args[0]
 	}
 	if cnpj != "" {
-		return validCNPJ(cnpj)
+		return validateCNPJ(cnpj), nil
 	}
-	return generateCNPJ()
+	return generateCNPJ(), nil
 }
 
 func generateCNPJ() string {
 	return helper.Generate()
 }
 
-func validCNPJ(cnpj string) string {
+func validateCNPJ(cnpj string) string {
 	v := cli.Red("invalid")
 	if helper.Valid(cnpj) {
 		v = cli.Green("valid")

@@ -4,23 +4,32 @@ import (
 	"testing"
 )
 
-func TestGeneratePassword(t *testing.T) {
-	p := generatePassword([]string{})
+func TestRunPassword(t *testing.T) {
+	p, err := runPassword([]string{})
+	if err != nil {
+		t.Errorf("There should not be an error, error: %s", err)
+	}
 	if len(p) != 8 {
 		t.Errorf("Expected '%d', got '%d'", 8, len(p))
 	}
 }
 
-func TestGeneratePasswordWithLength(t *testing.T) {
-	p := generatePassword([]string{"7"})
+func TestRunPasswordWithLength(t *testing.T) {
+	p, err := runPassword([]string{"7"})
+	if err != nil {
+		t.Errorf("There should not be an error, error: %s", err)
+	}
 	if len(p) != 7 {
 		t.Errorf("Expected '%d', got '%d'", 7, len(p))
 	}
 }
 
-func TestGeneratePasswordWithFlag(t *testing.T) {
+func TestRunPasswordWithFlag(t *testing.T) {
 	inputLength = 14
-	p := generatePassword([]string{})
+	p, err := runPassword([]string{})
+	if err != nil {
+		t.Errorf("There should not be an error, error: %s", err)
+	}
 	if len(p) != 14 {
 		t.Errorf("Expected '%d', got '%d'", 14, len(p))
 	}

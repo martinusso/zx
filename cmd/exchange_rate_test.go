@@ -19,7 +19,10 @@ func TestExchangeRate(t *testing.T) {
 	defer ts.Close()
 	url = ts.URL
 
-	got := exchangeRate()
+	got, err := runExchangeRate()
+	if err != nil {
+		t.Errorf("There should not be an error, error: %s", err)
+	}
 	expected := "BRL: 4.05 (USD 0.25), EUR: 0.90 (USD 1.12), GBP: 0.76 (USD 1.31)"
 	if got != expected {
 		t.Errorf("Expected '%s', got '%s'", expected, got)

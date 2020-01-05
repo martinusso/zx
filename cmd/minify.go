@@ -37,14 +37,16 @@ var (
 		Use:   "minify",
 		Short: "Minify HTML, CSS, JS, JSON, XML and SVG",
 		Long: `minify removes whitespace, strips comments, combines files, and optimizes/shortens a few common programming patterns.
-
 ` + supportedMediaTypes + `
-
 To confirm the input, press Ctrl+] ENTER`,
-		Run: func(cmd *cobra.Command, args []string) {
-			s := runMinify(args)
+		RunE: func(cmd *cobra.Command, args []string) error {
+			s, err := runMinify(args)
+			if err != nil {
+				return err
+			}
 			clipboard.Write(s)
 			fmt.Println(s)
+			return nil
 		},
 	}
 )
@@ -54,18 +56,16 @@ func init() {
 	rootCmd.AddCommand(minifyCmd)
 }
 
-func runMinify(args []string) string {
+func runMinify(args []string) (string, error) {
 	mediaType := getMediaType(args)
 	if mediaType == "" {
-		err := errors.New(fmt.Sprintf("An invalid media type was specified. %s", supportedMediaTypes))
-		fmt.Fprintln(os.Stderr, err)
-		return ""
+		return "", fmt.Errorf("An invalid media type was specified. %s", supportedMediaTypes)
 	}
 
 	fmt.Println("Type (or paste) here:")
 	lines := getMinifyInput()
 	if len(lines) == 0 {
-		return ""
+		return "", errors.New(errEmptyInput)
 	}
 
 	m := minify.New()
@@ -83,10 +83,9 @@ func runMinify(args []string) string {
 	m.AddFuncRegexp(regexp.MustCompile("[/+]xml$"), xml.Minify)
 	s, err := m.String(mediaType, strings.Join(lines, ""))
 	if err != nil {
-		fmt.Fprintln(os.Stderr, err)
-		return ""
+		return "", err
 	}
-	return s
+	return s, nil
 }
 
 func getMediaType(args []string) string {

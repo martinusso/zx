@@ -16,9 +16,13 @@ var (
 		Use:   "salt",
 		Short: "Generate a random and unique salt and hash for passwords",
 		Long:  `Generate a random and unique salt and hash for passwords`,
-		Run: func(cmd *cobra.Command, args []string) {
-			p, h, s := generateSalt(args)
-			fmt.Println(fmt.Sprintf("Password: %s\nHash: %s\nSalt: %s", p, h, s))
+		RunE: func(cmd *cobra.Command, args []string) error {
+			s, err := runSalt(args)
+			if err != nil {
+				return err
+			}
+			fmt.Println(s)
+			return nil
 		},
 	}
 )
@@ -28,11 +32,11 @@ func init() {
 	rootCmd.AddCommand(saltCmd)
 }
 
-func generateSalt(args []string) (p string, h string, s string) {
-	p = getPassword(args)
-	s = getSalt()
-	h = hash(p + s)
-	return
+func runSalt(args []string) (string, error) {
+	p := getPassword(args)
+	s := getSalt()
+	h := hash(p + s)
+	return fmt.Sprintf("Password: %s\nHash: %s\nSalt: %s", p, h, s), nil
 }
 
 func getPassword(args []string) string {
@@ -42,8 +46,7 @@ func getPassword(args []string) string {
 	if len(args) > 0 {
 		return args[0]
 	}
-
-	return generatePassword([]string{"8"})
+	return generatePassword(8)
 }
 
 func getSalt() string {
