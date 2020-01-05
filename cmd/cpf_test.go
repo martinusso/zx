@@ -7,15 +7,18 @@ import (
 	"github.com/martinusso/zx/internal/cli"
 )
 
-func TestCPF(t *testing.T) {
-	got := cpf([]string{})
+func TestRunCPF(t *testing.T) {
+	got, err := runCPF([]string{})
+	if err != nil {
+		t.Errorf("There should not be an error, error: %s", err)
+	}
 	if len(got) != 11 {
 		t.Errorf("Expected '%d', got '%d'", 11, len(got))
 	}
 
-	new := cpf([]string{got})
+	n, _ := runCPF([]string{got})
 	expected := fmt.Sprintf("%s ➜ %s", got, cli.Green("valid"))
-	if new != expected {
-		t.Errorf("Expected '%s', got '%s'", expected, new)
+	if n != expected {
+		t.Errorf("Expected '%s', got '%s'", expected, n)
 	}
 }

@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"strings"
 	"testing"
 )
 
@@ -10,30 +11,42 @@ const (
 )
 
 func TestGenerateSalt(t *testing.T) {
-	p, h, s := generateSalt([]string{passwordTest})
-	if p != passwordTest {
-		t.Errorf("Expected '%s', got '%s'", passwordTest, p)
+	s, err := runSalt([]string{passwordTest})
+	if err != nil {
+		t.Errorf("There should not be an error, error: %s", err)
 	}
-	if len(h) != hashLength {
-		t.Errorf("Expected '%d', got '%d'", hashLength, len(h))
+	if !strings.Contains(s, passwordTest) {
+		t.Errorf("Expected contains password '%s' in '%s'", passwordTest, s)
 	}
-	if len(s) != hashLength {
-		t.Errorf("Expected '%d', got '%d'", hashLength, len(s))
+	expected := 24 + 12 + hashLength + hashLength
+	if len(s) != expected {
+		t.Errorf("Expected '%d', got '%d'", expected, len(s))
 	}
 }
 
 func TestGenerateSaltWithoutPassword(t *testing.T) {
-	p, _, _ := generateSalt([]string{})
-	if len(p) != 8 {
-		t.Errorf("Expected '%d', got '%d'", 8, len(p))
+	s, err := runSalt([]string{})
+	if err != nil {
+		t.Errorf("There should not be an error, error: %s", err)
+	}
+	expected := 24 + 8 + hashLength + hashLength
+	if len(s) != expected {
+		t.Errorf("Expected '%d', got '%d'", expected, len(s))
 	}
 }
 
 func TestGenerateSaltWithPasswordFlag(t *testing.T) {
 	saltPassword = passwordTest
-	p, _, _ := generateSalt([]string{})
-	if p != passwordTest {
-		t.Errorf("Expected '%s', got '%s'", passwordTest, p)
+	s, err := runSalt([]string{})
+	if err != nil {
+		t.Errorf("There should not be an error, error: %s", err)
+	}
+	if !strings.Contains(s, passwordTest) {
+		t.Errorf("Expected contains password '%s' in '%s'", passwordTest, s)
+	}
+	expected := 24 + 12 + hashLength + hashLength
+	if len(s) != expected {
+		t.Errorf("Expected '%d', got '%d'", expected, len(s))
 	}
 
 	saltPassword = ""

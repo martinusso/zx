@@ -26,10 +26,14 @@ var (
 		Use:   "password",
 		Short: "Generate a random password",
 		Long:  `Generate a random password`,
-		Run: func(cmd *cobra.Command, args []string) {
-			s := generatePassword(args)
+		RunE: func(cmd *cobra.Command, args []string) error {
+			s, err := runPassword(args)
+			if err != nil {
+				return err
+			}
 			clipboard.Write(s)
 			fmt.Println(s)
+			return nil
 		},
 	}
 )
@@ -40,12 +44,12 @@ func init() {
 	rootCmd.AddCommand(passwordCmd)
 }
 
-func generatePassword(args []string) string {
+func runPassword(args []string) (string, error) {
 	length := getPasswordLength(args)
-	return makePassword(length)
+	return generatePassword(length), nil
 }
 
-func makePassword(l int) string {
+func generatePassword(l int) string {
 	var all string
 	var i int
 
