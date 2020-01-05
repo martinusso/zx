@@ -76,7 +76,10 @@ func generatePassword(l int) string {
 	}
 
 	if all == "" {
-		return ""
+		all = lowerLetters +
+			upperLetters +
+			numbers +
+			symbols
 	}
 
 	rand.Seed(time.Now().UnixNano())

@@ -28,3 +28,22 @@ func TestExchangeRate(t *testing.T) {
 		t.Errorf("Expected '%s', got '%s'", expected, got)
 	}
 }
+
+func TestExchangeRateError(t *testing.T) {
+	ts := httptest.NewServer(
+		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.WriteHeader(http.StatusBadRequest)
+		}))
+	defer ts.Close()
+	url = ts.URL
+
+	got, err := runExchangeRate()
+	expected := "400 Bad Request"
+	if err.Error() != expected {
+		t.Errorf("Expected '%s', got '%s'", expected, err.Error())
+	}
+	expected = ""
+	if got != expected {
+		t.Errorf("Expected '%s', got '%s'", expected, got)
+	}
+}

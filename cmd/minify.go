@@ -63,7 +63,10 @@ func runMinify(args []string) (string, error) {
 	}
 
 	fmt.Println("Type (or paste) here:")
-	lines := getMinifyInput()
+	lines, err := getMinifyInput()
+	if err != nil {
+		return "", err
+	}
 	if len(lines) == 0 {
 		return "", errors.New(emptyInput)
 	}
@@ -111,7 +114,7 @@ func getMediaType(args []string) string {
 	return ""
 }
 
-func getMinifyInput() (lines []string) {
+func getMinifyInput() (lines []string, err error) {
 	scn := bufio.NewScanner(os.Stdin)
 	for scn.Scan() {
 		line := scn.Text()
@@ -123,8 +126,6 @@ func getMinifyInput() (lines []string) {
 		}
 		lines = append(lines, line)
 	}
-	if err := scn.Err(); err != nil {
-		fmt.Fprintln(os.Stderr, err)
-	}
+	err = scn.Err()
 	return
 }

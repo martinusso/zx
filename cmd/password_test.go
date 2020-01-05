@@ -36,3 +36,14 @@ func TestRunPasswordWithFlag(t *testing.T) {
 
 	inputLength = 0
 }
+
+func TestRunPasswordWithout(t *testing.T) {
+	inputNo = "luns"
+	p, err := runPassword([]string{"6"})
+	if err != nil {
+		t.Errorf("There should not be an error, error: %s", err)
+	}
+	if len(p) != 6 {
+		t.Errorf("Expected '%d', got '%d'", 14, len(p))
+	}
+}

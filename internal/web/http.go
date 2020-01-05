@@ -2,6 +2,7 @@ package web
 
 import (
 	"encoding/json"
+	"errors"
 	"io/ioutil"
 	"net/http"
 )
@@ -12,6 +13,10 @@ func GetBody(url string) ([]byte, error) {
 		return nil, err
 	}
 	defer res.Body.Close()
+
+	if res.StatusCode == http.StatusBadRequest {
+		return nil, errors.New("400 Bad Request")
+	}
 
 	return ioutil.ReadAll(res.Body)
 }

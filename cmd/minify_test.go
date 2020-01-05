@@ -80,6 +80,17 @@ func TestMinifyHTML(t *testing.T) {
 	}
 }
 
+func TestMinifyEmptyInput(t *testing.T) {
+	got, err := testMinify(mediaTypeHTML, nil)
+	if err.Error() != emptyInput {
+		t.Errorf("Expected '%s', got '%s'", emptyInput, err.Error())
+	}
+	expected := ""
+	if got != expected {
+		t.Errorf("Expected '%s', got '%s'", expected, got)
+	}
+}
+
 func testMinify(mediaType string, input []byte) (string, error) {
 	tmpfile, err := ioutil.TempFile("", "example")
 	if err != nil {

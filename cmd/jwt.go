@@ -53,11 +53,9 @@ func runDecodeJWT(args []string) (string, error) {
 }
 
 func getTokenJWT(args []string) (token []string, err error) {
-	if len(args) == 0 {
-		err = errors.New(invalidToken)
-		return
+	if len(args) > 0 {
+		token = strings.Split(args[0], ".")
 	}
-	token = strings.Split(args[0], ".")
 
 	// check if the jwt token contains header, payload and token
 	if len(token) != 3 {
@@ -76,9 +74,6 @@ func decodeSegment(seg string) ([]byte, error) {
 		return nil, err
 	}
 	var data map[string]interface{}
-	err = json.Unmarshal(decoded, &data)
-	if err != nil {
-		return nil, err
-	}
+	json.Unmarshal(decoded, &data)
 	return json.MarshalIndent(data, "", "  ")
 }
