@@ -32,7 +32,7 @@ Payload:
 func TestDecodeInvalidJWT(t *testing.T) {
 	validJWT := `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ`
 	_, err := runDecodeJWT([]string{validJWT})
-	if err.Error() != errInvalidToken {
-		t.Errorf("Expected error %s, got: %s", errInvalidToken, err)
+	if err.Error() != invalidToken {
+		t.Errorf("Expected error %s, got: %s", invalidToken, err)
 	}
 }

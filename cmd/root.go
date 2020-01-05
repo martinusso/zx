@@ -3,7 +3,7 @@ package cmd
 import "github.com/spf13/cobra"
 
 const (
-	errEmptyInput = "Error: Empty input..."
+	emptyInput = "Error: Empty input..."
 )
 
 var (

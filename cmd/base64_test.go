@@ -6,8 +6,8 @@ import (
 
 func TestBase64EmptyInput(t *testing.T) {
 	got, err := runBase64([]string{})
-	if err.Error() != errEmptyInput {
-		t.Errorf("Expected '%s', got '%s'", errEmptyInput, err)
+	if err.Error() != emptyInput {
+		t.Errorf("Expected '%s', got '%s'", emptyInput, err)
 	}
 	expected := ""
 	if got != expected {

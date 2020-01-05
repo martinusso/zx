@@ -65,7 +65,7 @@ func runMinify(args []string) (string, error) {
 	fmt.Println("Type (or paste) here:")
 	lines := getMinifyInput()
 	if len(lines) == 0 {
-		return "", errors.New(errEmptyInput)
+		return "", errors.New(emptyInput)
 	}
 
 	m := minify.New()

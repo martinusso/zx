@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	errInvalidToken = "Invalid token: token should contain header, payload and secret"
+	invalidToken = "Invalid token: token should contain header, payload and secret"
 )
 
 var jwtCmd = &cobra.Command{
@@ -54,14 +54,14 @@ func runDecodeJWT(args []string) (string, error) {
 
 func getTokenJWT(args []string) (token []string, err error) {
 	if len(args) == 0 {
-		err = errors.New(errInvalidToken)
+		err = errors.New(invalidToken)
 		return
 	}
 	token = strings.Split(args[0], ".")
 
 	// check if the jwt token contains header, payload and token
 	if len(token) != 3 {
-		err = errors.New(errInvalidToken)
+		err = errors.New(invalidToken)
 	}
 	return
 }

@@ -38,7 +38,7 @@ func init() {
 
 func runBase64(args []string) (string, error) {
 	if len(args) == 0 {
-		return "", errors.New(errEmptyInput)
+		return "", errors.New(emptyInput)
 	}
 
 	input := args[0]
