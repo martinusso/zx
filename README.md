@@ -164,6 +164,29 @@ BRL: 4.05 (USD 0.25), EUR: 0.90 (USD 1.12), GBP: 0.76 (USD 1.31)
   -h, --help   help for exchange
 ```
 
+### ip
+
+IP geolocation.
+It provides a simple IP to country, state and city mapping. Using db-ip.com/api.
+
+_Copies automatically the output to the clipboard._
+
+##### Usage:
+
+```
+~ zx ip 8.8.8.8
+IP: 8.8.8.8
+Continent: (SA) South America
+Country: (BR) Brazil
+City: Vitória (Espírito Santo)
+```
+
+##### Flags:
+```
+  -h, --help   help for ip
+```
+
+
 ### jwt
 
 Decode a JWT token.

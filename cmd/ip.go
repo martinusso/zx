@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/martinusso/zx/internal/clipboard"
@@ -19,8 +20,7 @@ type ipResponse struct {
 }
 
 var (
-	inputIP string
-	ipURL   = "https://api.db-ip.com/v2/free"
+	ipURL = "https://api.db-ip.com/v2/free"
 
 	ipCmd = &cobra.Command{
 		Use:   "ip",
@@ -40,16 +40,14 @@ It provides a simple IP to country, state and city mapping. Using db-ip.com/api.
 )
 
 func init() {
-	ipCmd.Flags().StringVar(&inputIP, "ip", "", "IP")
 	rootCmd.AddCommand(ipCmd)
 }
 
 func runIP(args []string) (string, error) {
-	if inputIP == "" {
-		if len(args) > 0 {
-			inputIP = args[0]
-		}
+	if len(args) != 1 {
+		return "", errors.New(emptyInput)
 	}
+	inputIP := args[0]
 
 	url := fmt.Sprintf("%s/%s", ipURL, inputIP)
 
