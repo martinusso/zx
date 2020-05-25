@@ -21,7 +21,7 @@ type ipResponse struct {
 
 var (
 	ipURL         = "https://api.db-ip.com/v2/free"
-	urlWhatIsMyIP = "https: //api.ipify.org?format=json"
+	urlWhatIsMyIP = "https://api.ipify.org?format=json"
 
 	ipCmd = &cobra.Command{
 		Use:   "ip",
