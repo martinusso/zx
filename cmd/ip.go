@@ -20,13 +20,17 @@ type ipResponse struct {
 }
 
 var (
-	ipURL = "https://api.db-ip.com/v2/free"
+	ipURL         = "https://api.db-ip.com/v2/free"
+	urlWhatIsMyIP = "https: //api.ipify.org?format=json"
 
 	ipCmd = &cobra.Command{
 		Use:   "ip",
-		Short: "IP geolocation",
-		Long: `IP geolocation.
-It provides a simple IP to country, state and city mapping. Using db-ip.com/api.`,
+		Short: "IP geolocation and what is my IP address",
+		Long: `IP geolocation. [How to use: zx ip 187.36.173.130]
+It provides a simple IP to country, state and city mapping. Using db-ip.com/api.
+
+What is my IP address. [How to use: zx ip my]
+It shows your IPv4 address. Using ipify.org API.`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			s, err := runIP(args)
 			if err != nil {
@@ -47,11 +51,18 @@ func runIP(args []string) (string, error) {
 	if len(args) != 1 {
 		return "", errors.New(emptyInput)
 	}
+
 	inputIP := args[0]
+	if inputIP == "my" {
+		return whatIsMyIP()
+	}
+	return ipGeolocation(inputIP)
+}
+
+func ipGeolocation(inputIP string) (string, error) {
+	data := &ipResponse{}
 
 	url := fmt.Sprintf("%s/%s", ipURL, inputIP)
-
-	data := &ipResponse{}
 	err := web.GetJSON(url, data)
 	if err != nil {
 		return "", err
@@ -66,4 +77,16 @@ func runIP(args []string) (string, error) {
 		data.City,
 		data.StateProv)
 	return s, nil
+}
+
+func whatIsMyIP() (string, error) {
+	var data struct {
+		IP string `json:"ip"`
+	}
+
+	err := web.GetJSON(urlWhatIsMyIP, &data)
+	if err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("Your IPv4 Address Is: %s\n", data.IP), nil
 }
