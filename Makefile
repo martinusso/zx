@@ -2,7 +2,7 @@ BINARY=zx
 
 .PHONY: build
 build: tidy clean
-	GOOS=linux go build -o ./$(BINARY)
+	go build -o ./$(BINARY)
 
 .PHONY: clean
 clean:
